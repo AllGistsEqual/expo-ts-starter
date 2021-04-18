@@ -1,7 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import counterReducer from './demo/counter'
+import userReducer from './ducks/user'
+import counterReducer from './ducks/counter'
 
 const rootReducer = combineReducers({
+    user: userReducer,
     counter: counterReducer,
 })
 
