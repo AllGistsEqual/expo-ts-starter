@@ -1,17 +1,28 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Text, View, TouchableWithoutFeedback, StyleSheet } from 'react-native'
-import { useReduxDispatch } from '../redux'
-import { setLogin } from '../redux/ducks/user'
+import { useFocusEffect } from '@react-navigation/native'
+import { MainNavigationProp } from '../../routing/types'
+import { MainRoutes } from '../../routing/routes'
 
-const SplashScreen = (): React.ReactElement => {
-    const dispatch = useReduxDispatch()
+type SplashScreenProps = {
+    navigation: MainNavigationProp<MainRoutes.Splash>
+}
 
-    const handleClick = (): void => {
-        dispatch(setLogin(true))
-    }
+const SplashScreen = ({ navigation }: SplashScreenProps): React.ReactElement => {
+    const navigate = useCallback(() => navigation.navigate(MainRoutes.AppCheck), [navigation])
+
+    useFocusEffect(
+        useCallback(() => {
+            const navigationTimer = setTimeout(() => {
+                navigate()
+            }, 3000)
+
+            return (): void => clearTimeout(navigationTimer)
+        }, [navigate]),
+    )
 
     return (
-        <TouchableWithoutFeedback onPress={() => handleClick()}>
+        <TouchableWithoutFeedback onPress={() => navigate()}>
             <View style={styles.page}>
                 <View style={styles.titleBox}>
                     <Text>ALL BITS EQUAL</Text>
@@ -19,7 +30,7 @@ const SplashScreen = (): React.ReactElement => {
                     <Text>The Expo Starter Kit</Text>
                 </View>
                 <View style={styles.contentBox}>
-                    <Text>Touch Screen to start!</Text>
+                    <Text>stay legendary</Text>
                 </View>
                 <View style={styles.footer}>
                     <Text>written by Konrad Abe</Text>

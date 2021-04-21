@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import { MainNavigationProp } from '../routing/types'
-import { MainRoutes } from '../routing/routes'
+import { MainNavigationProp } from '../../routing/types'
+import { MainRoutes } from '../../routing/routes'
 
 type AppLoadingScreenProps = {
-    navigation: MainNavigationProp<MainRoutes.Loading>
+    navigation: MainNavigationProp<MainRoutes.AppLoading>
 }
 
 const AppLoadingScreen = ({ navigation }: AppLoadingScreenProps): React.ReactElement => {
@@ -16,7 +16,7 @@ const AppLoadingScreen = ({ navigation }: AppLoadingScreenProps): React.ReactEle
 
     return (
         <View style={styles.page}>
-            <Text>loading...</Text>
+            <Text>loading User Data...</Text>
         </View>
     )
 }

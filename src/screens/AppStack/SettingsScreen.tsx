@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet, Button } from 'react-native'
-import { MainNavigationProp } from '../routing/types'
-import { MainRoutes } from '../routing/routes'
+import { MainNavigationProp } from '../../routing/types'
+import { MainRoutes } from '../../routing/routes'
 
 type SettingsScreenProps = {
     navigation: MainNavigationProp<MainRoutes.Settings>
