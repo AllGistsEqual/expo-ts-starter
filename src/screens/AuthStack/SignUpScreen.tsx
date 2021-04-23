@@ -4,6 +4,7 @@ import { MainNavigationProp } from '../../routing/types'
 import { MainRoutes } from '../../routing/routes'
 import { useReduxDispatch } from '../../redux'
 import { attemptSignUp } from '../../redux/ducks/user'
+import UserForm from '../../components/demo/UserForm'
 
 type SignUpScreenProps = {
     navigation: MainNavigationProp<MainRoutes.SignUp>
@@ -11,14 +12,14 @@ type SignUpScreenProps = {
 const SignUpScreen = ({ navigation }: SignUpScreenProps): React.ReactElement => {
     const dispatch = useReduxDispatch()
 
-    const handleClick = (): void => {
-        dispatch(attemptSignUp('newEmail@test.com', 'newPassword'))
+    const handleSubmit = (email: string, password: string): void => {
+        dispatch(attemptSignUp(email, password))
     }
 
     return (
         <View style={styles.page}>
             <Text>Sign Up</Text>
-            <Button title="Continue" onPress={() => handleClick()} />
+            <UserForm submitHandler={handleSubmit} label="Sign Up" />
             <Button title="Sign In" onPress={() => navigation.navigate(MainRoutes.SignIn)} />
         </View>
     )

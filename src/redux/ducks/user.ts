@@ -56,6 +56,8 @@ export const attemptSignUp = createAction(
 )
 
 export const selectLogin = (state: RootState): boolean => state.user.login
+export const selectIsSubmitting = (state: RootState): boolean => state.user.loginState === 'loading'
+export const selectLoginMessage = (state: RootState): string | undefined => state.user.message
 
 export const userMiddleware: Middleware = ({ dispatch }) => next => action => {
     next(action)
@@ -79,9 +81,11 @@ export const userMiddleware: Middleware = ({ dispatch }) => next => action => {
 
 const userReducer = createReducer(initialState, builder => {
     builder
-        .addCase(attemptLogin, state => {
-            if (state.loginState) state.loginState = 'loading'
-        })
+        .addCase(attemptLogin, state => ({
+            ...state,
+            loginState: 'loading',
+            message: 'loading',
+        }))
         .addCase(setLogin, (state, action) => {
             const { email, newUser } = action.payload
             return {
