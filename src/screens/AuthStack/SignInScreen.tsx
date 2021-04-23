@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Button } from 'react-native'
 import { MainNavigationProp } from '../../routing/types'
 import { MainRoutes } from '../../routing/routes'
 import { useReduxDispatch } from '../../redux'
-import { setLogin } from '../../redux/ducks/user'
+import { attemptLogin } from '../../redux/ducks/user'
 
 type SignInScreenProps = {
     navigation: MainNavigationProp<MainRoutes.SignIn>
@@ -12,7 +12,7 @@ const SignInScreen = ({ navigation }: SignInScreenProps): React.ReactElement => 
     const dispatch = useReduxDispatch()
 
     const handleClick = (): void => {
-        dispatch(setLogin(true))
+        dispatch(attemptLogin('hans@wurst.de', 'wiener'))
     }
 
     return (
