@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View, StyleSheet, Button } from 'react-native'
 import { MainNavigationProp } from '../../routing/types'
 import { MainRoutes } from '../../routing/routes'
+import Settings from '../../components/demo/Settings'
 
 type SettingsScreenProps = {
     navigation: MainNavigationProp<MainRoutes.Settings>
@@ -10,6 +11,7 @@ type SettingsScreenProps = {
 const SettingsScreen = ({ navigation }: SettingsScreenProps): React.ReactElement => (
     <View style={styles.page}>
         <Text>SETTINGS</Text>
+        <Settings />
         <Button title="back" onPress={() => navigation.goBack()} />
     </View>
 )
