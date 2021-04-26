@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 
-import { MainStack, MainRoutes } from './routes'
+import { HomeRoutes, HomeTabs, MainRoutes, MainStack } from './routes'
 import { useReduxSelector } from '../redux'
 import { selectLogin } from '../redux/ducks/user'
 
@@ -11,7 +11,17 @@ import SignInScreen from '../screens/AuthStack/SignInScreen'
 import SignUpScreen from '../screens/AuthStack/SignUpScreen'
 import AppLoadingScreen from '../screens/AppStack/AppLoadingScreen'
 import HomeScreen from '../screens/AppStack/HomeScreen'
+import HomeScreenB from '../screens/AppStack/HomeScreenB'
+import HomeScreenC from '../screens/AppStack/HomeScreenC'
 import SettingsScreen from '../screens/AppStack/SettingsScreen'
+
+const Home = () => (
+    <HomeTabs.Navigator>
+        <HomeTabs.Screen name={HomeRoutes.HomeA} component={HomeScreen} />
+        <HomeTabs.Screen name={HomeRoutes.HomeB} component={HomeScreenB} />
+        <HomeTabs.Screen name={HomeRoutes.HomeC} component={HomeScreenC} />
+    </HomeTabs.Navigator>
+)
 
 const MainNavigation = (): React.ReactElement => {
     const isLoggedIn = useReduxSelector(selectLogin)
@@ -25,7 +35,7 @@ const MainNavigation = (): React.ReactElement => {
                             name={MainRoutes.AppLoading}
                             component={AppLoadingScreen}
                         />
-                        <MainStack.Screen name={MainRoutes.Home} component={HomeScreen} />
+                        <MainStack.Screen name={MainRoutes.Home} component={Home} />
                         <MainStack.Screen name={MainRoutes.Settings} component={SettingsScreen} />
                     </>
                 ) : (

@@ -1,4 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 export enum MainRoutes {
     // Init Stack
@@ -11,8 +12,14 @@ export enum MainRoutes {
 
     // App Stack
     AppLoading = 'AppLoading', // Load User Data for signed in users
-    Home = 'Home', // The first "real" page of the app
+    Home = 'Home', // The first "real" page of the app, now a set of tabs
     Settings = 'Settings', // Default Settings Page
+}
+
+export enum HomeRoutes {
+    HomeA = 'Home Section A', // demo A for nesting
+    HomeB = 'Home Section B', // demo B for nesting
+    HomeC = 'Home Section C', // demo C for nesting
 }
 
 export type MainStackParamList = {
@@ -26,8 +33,16 @@ export type MainStackParamList = {
 
     // App Stack
     [MainRoutes.AppLoading]: undefined
-    [MainRoutes.Home]: { update: boolean } | undefined // just an example, "update" will later be used for version checks
+    [MainRoutes.Home]: undefined
     [MainRoutes.Settings]: undefined
 }
 
+export type HomeTabsParamList = {
+    [HomeRoutes.HomeA]: { update: boolean } | undefined // just an example, "update" will later be used for version checks
+    [HomeRoutes.HomeB]: undefined
+    [HomeRoutes.HomeC]: undefined
+}
+
 export const MainStack = createStackNavigator<MainStackParamList>()
+
+export const HomeTabs = createBottomTabNavigator<HomeTabsParamList>()
