@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import { MainNavigationProp } from '../../routing/types'
-import { MainRoutes } from '../../routing/routes'
+import { useFocusEffect } from '@react-navigation/native'
+import { useReduxDispatch } from '../../redux'
+import { setRunning } from '../../redux/ducks/appState'
 
-type AppLoadingScreenProps = {
-    navigation: MainNavigationProp<MainRoutes.AppLoading>
-}
+const AppLoadingScreen = (): React.ReactElement => {
+    const dispatch = useReduxDispatch()
 
-const AppLoadingScreen = ({ navigation }: AppLoadingScreenProps): React.ReactElement => {
-    useEffect(() => {
-        setTimeout(() => {
-            navigation.navigate(MainRoutes.Home)
-        }, 1500)
-    }, [navigation])
+    useFocusEffect(
+        useCallback(() => {
+            setTimeout(() => {
+                dispatch(setRunning(true))
+            }, 1500)
+        }, [dispatch]),
+    )
 
     return (
         <View style={styles.page}>

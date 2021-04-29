@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 
 import { HomeRoutes, HomeTabs, MainRoutes, MainStack } from './routes'
 import { useReduxSelector } from '../redux'
-import { selectLogin } from '../redux/ducks/user'
+import { selectIsRunning } from '../redux/ducks/appState'
 
 import SplashScreen from '../screens/InitStack/SplashScreen'
 import AppCheckScreen from '../screens/InitStack/AppCheckScreen'
@@ -24,17 +24,13 @@ const Home = () => (
 )
 
 const MainNavigation = (): React.ReactElement => {
-    const isLoggedIn = useReduxSelector(selectLogin)
+    const isAppRunning = useReduxSelector(selectIsRunning)
 
     return (
         <NavigationContainer>
             <MainStack.Navigator headerMode="none">
-                {isLoggedIn ? (
+                {isAppRunning ? (
                     <>
-                        <MainStack.Screen
-                            name={MainRoutes.AppLoading}
-                            component={AppLoadingScreen}
-                        />
                         <MainStack.Screen name={MainRoutes.Home} component={Home} />
                         <MainStack.Screen name={MainRoutes.Settings} component={SettingsScreen} />
                     </>
@@ -44,6 +40,10 @@ const MainNavigation = (): React.ReactElement => {
                         <MainStack.Screen name={MainRoutes.AppCheck} component={AppCheckScreen} />
                         <MainStack.Screen name={MainRoutes.SignIn} component={SignInScreen} />
                         <MainStack.Screen name={MainRoutes.SignUp} component={SignUpScreen} />
+                        <MainStack.Screen
+                            name={MainRoutes.AppLoading}
+                            component={AppLoadingScreen}
+                        />
                     </>
                 )}
             </MainStack.Navigator>

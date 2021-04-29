@@ -2,6 +2,7 @@
 import { createAction, createReducer, Middleware } from '@reduxjs/toolkit'
 import { RootState } from '../index'
 import { createAccount, login } from '../../mock/mockUser'
+import { setRunning } from './appState'
 
 type LoginState = 'init' | 'loading' | 'denied' | 'loggedOut'
 
@@ -77,11 +78,20 @@ export const userMiddleware: Middleware = ({ dispatch }) => next => action => {
             .then(() => dispatch(setLogin(email, true)))
             .catch(err => dispatch(setLogout('denied', err.message)))
     }
+
+    if (setLogout.match(action)) {
+        dispatch(setRunning(false))
+    }
 }
 
 const userReducer = createReducer(initialState, builder => {
     builder
         .addCase(attemptLogin, state => ({
+            ...state,
+            loginState: 'loading',
+            message: 'loading',
+        }))
+        .addCase(attemptSignUp, state => ({
             ...state,
             loginState: 'loading',
             message: 'loading',
