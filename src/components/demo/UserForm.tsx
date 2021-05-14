@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import styled from 'styled-components'
 import { useReduxSelector } from '../../redux'
 import { selectIsSubmitting, selectLoginMessage } from '../../redux/ducks/user'
 
@@ -16,42 +17,56 @@ const UserForm = ({ submitHandler, label }: UserFormProps): React.ReactElement =
     const loginMessage = useReduxSelector(selectLoginMessage)
 
     return (
-        <View>
-            <TextInput
-                style={styles.input}
+        <StyledContainer>
+            <StyledInput
                 onChangeText={text => setEmail(text)}
                 value={email}
                 keyboardType="email-address"
             />
-            <TextInput
-                style={styles.input}
+            <StyledInput
                 onChangeText={text => setPassword(text)}
                 value={password}
                 secureTextEntry
             />
-            <Button
-                title={label}
+            <StyledButtonContainer
                 disabled={isLoading}
                 onPress={() => submitHandler(email, password)}
-            />
+            >
+                <StyledButtonText>{label}</StyledButtonText>
+            </StyledButtonContainer>
             {loginMessage && <Text>{loginMessage}</Text>}
-        </View>
+        </StyledContainer>
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    input: {
-        height: 40,
-        width: 300,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginTop: 20,
-    },
-})
+const StyledContainer = styled(View)`
+    border-color: black;
+    border-width: 3px;
+    border-radius: 5px;
+    padding: 10px;
+`
+
+const StyledInput = styled(TextInput)`
+    height: 40px;
+    width: 300px;
+    border-color: grey;
+    border-width: 1px;
+    margin: 10px 0;
+    padding: 5px;
+`
+
+const StyledButtonContainer = styled(TouchableOpacity)<{ disabled: boolean }>`
+    background-color: ${props => (props.disabled ? '#ccc' : '#009688')};
+    border-radius: 10px;
+    padding: 10px 12px;
+`
+
+const StyledButtonText = styled(Text)`
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    align-self: center;
+    text-transform: uppercase;
+`
 
 export default UserForm
