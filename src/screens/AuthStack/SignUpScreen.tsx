@@ -4,7 +4,7 @@ import { useFocusEffect } from '@react-navigation/native'
 import { MainNavigationProp } from '../../routing/types'
 import { MainRoutes } from '../../routing/routes'
 import { useReduxDispatch, useReduxSelector } from '../../redux'
-import { attemptSignUp, selectLogin } from '../../redux/ducks/user'
+import { attemptSignUp, resetLogin, selectLogin } from '../../redux/ducks/user'
 import UserForm from '../../components/demo/UserForm'
 
 type SignUpScreenProps = {
@@ -24,11 +24,16 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps): React.ReactElement => 
         dispatch(attemptSignUp(email, password))
     }
 
+    const handleSwitch = (): void => {
+        dispatch(resetLogin())
+        navigation.navigate(MainRoutes.SignIn)
+    }
+
     return (
         <View style={styles.page}>
             <Text>Sign Up</Text>
             <UserForm submitHandler={handleSubmit} label="Sign Up" />
-            <Button title="Sign In" onPress={() => navigation.navigate(MainRoutes.SignIn)} />
+            <Button title="Sign In" onPress={handleSwitch} />
         </View>
     )
 }
