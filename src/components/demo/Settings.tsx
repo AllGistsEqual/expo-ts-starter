@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import styled from 'styled-components/native' // eslint-disable-line import/no-extraneous-dependencies
 
 const Tab = createMaterialTopTabNavigator()
 
@@ -38,21 +39,19 @@ const SettingTabs = () => {
 
 const Settings = (): React.ReactElement => {
     return (
-        <View style={styles.settingsBox}>
+        <StyledSettingsBox>
             <SettingTabs />
-        </View>
+        </StyledSettingsBox>
     )
 }
 
-const styles = StyleSheet.create({
-    settingsBox: {
-        backgroundColor: '#ccc',
-        width: 300,
-        height: 500,
-        borderWidth: 4,
-        borderColor: '#000',
-        borderRadius: 5,
-    },
-})
+const StyledSettingsBox = styled.View`
+    background-color: #ccc;
+    width: 300px;
+    height: 500px;
+    border-width: 4px;
+    border-color: #000;
+    border-radius: 5px;
+`
 
 export default Settings

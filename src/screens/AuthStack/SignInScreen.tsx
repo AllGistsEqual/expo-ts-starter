@@ -1,11 +1,12 @@
 import React, { useCallback } from 'react'
-import { Text, View, StyleSheet, Button } from 'react-native'
+import { Text, Button } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { MainNavigationProp } from '../../routing/types'
 import { MainRoutes } from '../../routing/routes'
 import { useReduxDispatch, useReduxSelector } from '../../redux'
 import { attemptLogin, resetLogin, selectLogin } from '../../redux/ducks/user'
 import UserForm from '../../components/demo/UserForm'
+import DefaultPage from '../../components/shells/DefaultPage'
 
 type SignInScreenProps = {
     navigation: MainNavigationProp<MainRoutes.SignIn>
@@ -30,21 +31,12 @@ const SignInScreen = ({ navigation }: SignInScreenProps): React.ReactElement => 
     }
 
     return (
-        <View style={styles.page}>
+        <DefaultPage>
             <Text>Sign In</Text>
             <UserForm submitHandler={handleSubmit} label="Log in" />
             <Button title="Sign Up" onPress={handleSwitch} />
-        </View>
+        </DefaultPage>
     )
 }
-
-const styles = StyleSheet.create({
-    page: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-})
 
 export default SignInScreen

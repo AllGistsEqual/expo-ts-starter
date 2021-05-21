@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components/native' // eslint-disable-line import/no-extraneous-dependencies
 import { StatusBar } from 'expo-status-bar'
 import { enableScreens } from 'react-native-screens'
 import { PersistGate } from 'redux-persist/integration/react'

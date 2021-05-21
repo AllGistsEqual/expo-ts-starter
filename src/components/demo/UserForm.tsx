@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
-import styled from 'styled-components'
+import styled from 'styled-components/native' // eslint-disable-line import/no-extraneous-dependencies
 import { useReduxSelector } from '../../redux'
 import { selectIsSubmitting, selectLoginMessage, selectLoginState } from '../../redux/ducks/user'
 

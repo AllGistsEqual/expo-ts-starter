@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { useReduxDispatch } from '../../redux'
 import { setRunning } from '../../redux/ducks/appState'
+import DefaultPage from '../../components/shells/DefaultPage'
 
 const AppLoadingScreen = (): React.ReactElement => {
     const dispatch = useReduxDispatch()
@@ -16,19 +17,10 @@ const AppLoadingScreen = (): React.ReactElement => {
     )
 
     return (
-        <View style={styles.page}>
+        <DefaultPage>
             <Text>loading User Data...</Text>
-        </View>
+        </DefaultPage>
     )
 }
-
-const styles = StyleSheet.create({
-    page: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-})
 
 export default AppLoadingScreen

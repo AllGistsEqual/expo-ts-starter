@@ -1,8 +1,10 @@
 import React, { useCallback } from 'react'
-import { Text, View, TouchableWithoutFeedback, StyleSheet } from 'react-native'
+import { Text, TouchableWithoutFeedback } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
+import styled from 'styled-components/native' // eslint-disable-line import/no-extraneous-dependencies
 import { MainNavigationProp } from '../../routing/types'
 import { MainRoutes } from '../../routing/routes'
+import DefaultPage from '../../components/shells/DefaultPage'
 
 type SplashScreenProps = {
     navigation: MainNavigationProp<MainRoutes.Splash>
@@ -23,49 +25,43 @@ const SplashScreen = ({ navigation }: SplashScreenProps): React.ReactElement => 
 
     return (
         <TouchableWithoutFeedback onPress={() => navigate()}>
-            <View style={styles.page}>
-                <View style={styles.titleBox}>
+            <DefaultPage>
+                <StyledTitleBox>
                     <Text>ALL BITS EQUAL</Text>
                     <Text>presents</Text>
                     <Text>The Expo Starter Kit</Text>
-                </View>
-                <View style={styles.contentBox}>
+                </StyledTitleBox>
+                <StyledContentBox>
                     <Text>stay legendary</Text>
-                </View>
-                <View style={styles.footer}>
+                </StyledContentBox>
+                <StyledFooter>
                     <Text>written by Konrad Abe</Text>
-                </View>
-            </View>
+                </StyledFooter>
+            </DefaultPage>
         </TouchableWithoutFeedback>
     )
 }
 
-const styles = StyleSheet.create({
-    page: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    titleBox: {
-        width: '100%',
-        height: '50%',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    contentBox: {
-        width: '100%',
-        height: '45%',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    footer: {
-        width: '100%',
-        height: '10%',
-        paddingRight: '3%',
-        alignItems: 'flex-end',
-        justifyContent: 'center',
-    },
-})
+const StyledTitleBox = styled.View`
+    width: 100%;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+`
+
+const StyledContentBox = styled.View`
+    width: 100%;
+    height: 45%;
+    align-items: center;
+    justify-content: center;
+`
+
+const StyledFooter = styled.View`
+    width: 100%;
+    height: 10%;
+    padding-right: 3%;
+    align-items: flex-end;
+    justify-content: center;
+`
 
 export default SplashScreen

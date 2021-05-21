@@ -63,29 +63,32 @@ export const selectLoginState = (state: RootState): string | undefined => state.
 export const selectIsSubmitting = (state: RootState): boolean => state.user.loginState === 'loading'
 export const selectLoginMessage = (state: RootState): string | undefined => state.user.message
 
-export const userMiddleware: Middleware = ({ dispatch }) => next => action => {
-    next(action)
+export const userMiddleware: Middleware =
+    ({ dispatch }) =>
+    next =>
+    action => {
+        next(action)
 
-    if (attemptLogin.match(action)) {
-        const { email, password } = action.payload
+        if (attemptLogin.match(action)) {
+            const { email, password } = action.payload
 
-        login(email, password)
-            .then(() => dispatch(setLogin(email, false)))
-            .catch(err => dispatch(setLogout('denied', err.message)))
+            login(email, password)
+                .then(() => dispatch(setLogin(email, false)))
+                .catch(err => dispatch(setLogout('denied', err.message)))
+        }
+
+        if (attemptSignUp.match(action)) {
+            const { email, password } = action.payload
+
+            createAccount(email, password)
+                .then(() => dispatch(setLogin(email, true)))
+                .catch(err => dispatch(setLogout('denied', err.message)))
+        }
+
+        if (setLogout.match(action)) {
+            dispatch(setRunning(false))
+        }
     }
-
-    if (attemptSignUp.match(action)) {
-        const { email, password } = action.payload
-
-        createAccount(email, password)
-            .then(() => dispatch(setLogin(email, true)))
-            .catch(err => dispatch(setLogout('denied', err.message)))
-    }
-
-    if (setLogout.match(action)) {
-        dispatch(setRunning(false))
-    }
-}
 
 const userReducer = createReducer(initialState, builder => {
     builder

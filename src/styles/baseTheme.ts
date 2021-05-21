@@ -1,19 +1,19 @@
 const baseTheme = {
     spacer: {
-        xs: 5,
-        s: 10,
-        m: 30,
-        l: 50,
+        xs: '5px',
+        s: '10px',
+        m: '30px',
+        l: '50pc',
     },
     button: {
-        width: 56,
-        height: 32,
+        width: '56px',
+        height: '32px',
         large: {
-            height: 38,
+            height: '38px',
         },
         small: {
-            width: 24,
-            height: 24,
+            width: '24px',
+            height: '24px',
         },
     },
     palette: {
